@@ -2,6 +2,8 @@ console.log("interface loaded")
 
 $(document).ready(function() {
   var thermostat = new Thermostat();
+  updateDisplays();
+  getWeather();
 
   function updateTemperature() {
     $('#current_temperature_display').text(thermostat.temperature);
@@ -19,6 +21,9 @@ $(document).ready(function() {
   function updateUsageColour(){
     $('#current_usage_display').attr('class', thermostat.currentEnergyUsage());
   }
+  function updateWeather(){
+    $('#weather_display').text(gettingJSON());
+  }
 
   function updateDisplays(){
     updateTemperature();
@@ -27,7 +32,13 @@ $(document).ready(function() {
     updateUsageColour();
   }
 
-  updateDisplays();
+
+  function getWeather(){
+    $.get('http://api.openweathermap.org/data/2.5/weather?q=London&APPID=a84eb338a4d19a35c4da060294cec2fb&units=metric', function(data){
+      $('#weather_display').text(data.main.temp);
+    });
+  }
+
 
   $("#reset_button").click(function() {
     thermostat.reset();

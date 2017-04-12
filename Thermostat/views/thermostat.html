@@ -5,19 +5,28 @@
     <title>Thermostat</title>
       <link rel="stylesheet" href="../public/stylesheets/stylesheet.css">
       <link rel="icon" type="image/png" href="../public/icons/favicon.ico">
-      <script src="../src/thermostat.js"></script>
       <!-- <script src="../../jquery/src/jquery.min.js"></script> -->
+      <link rel="stylesheet" hraf="../panorama_viewer/panorama_viewer.css"></script>
       <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <script src="../panorama_viewer/jquery.panorama_viewer.js"></script>
+      <script src="../src/thermostat.js"></script>
+      <script src="../src/interface.js"></script>
   </head>
 
   <body>
-    <button id="reset_button">Reset Temperature</button>
-    <button id="temp_up_button">Increase Temperature</button>
-    <button id="temp_down_button">Decrease Temperature</button>
-    <button id="power_saver_switch">Toggle Power Saver</button>
 
-    <div id="current_temperature_display">Current Temp</div>
-    <div id="current_usage_display">Current Usage</div>
-    <div id="ps_on_display">Power Saver On</div>
+    <div class="panorama">
+      <img src="http://photoblogstop.com/wp-content/uploads/2012/07/Sierra_HDR_Panorama_DFX8048_2280x819_Q40_wm_mini.jpg">
+      <button id="reset_button">Reset Temperature</button>
+      <button id="temp_up_button">Increase Temperature</button>
+      <button id="temp_down_button">Decrease Temperature</button>
+      <button id="power_saver_switch">Toggle Power Saver</button>
+
+      <div id="current_temperature_display">Current temp</div>
+      <div id="current_usage_display">Current Usage</div>
+      <div id="ps_on_display">Power Saver On</div>
+  </div>
+
   </body>
+
 </html>

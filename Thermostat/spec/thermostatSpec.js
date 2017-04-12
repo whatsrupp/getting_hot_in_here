@@ -9,7 +9,7 @@ describe('Thermostat', function(){
   describe('properties of thermostat', function(){
 
     it('initializes with a temperature of 20', function(){
-      expect(thermostat.temperature).toEqual(20);
+      expect(thermostat.temperature).toEqual(DEFAULT_TEMPERATURE);
     });
 
     it('initializes in powersaving mode', function(){
@@ -17,11 +17,11 @@ describe('Thermostat', function(){
     });
 
     it('initalizes with a current max temperature of 25', function(){
-      expect(thermostat.currentMaxTemperature).toEqual(25);
+      expect(thermostat.currentMaxTemperature).toEqual(MAX_TEMP_POWERSAVER_ON);
     });
 
-    it('initialises with a minimum temperature of 10', function() {
-      expect(thermostat.minTemperature).toEqual(10);
+    it('initialises with a minimum temperature of 10', function(){
+      expect(thermostat.minTemperature).toEqual(MIN_TEMP);
     });
 
   });
@@ -53,6 +53,7 @@ describe('Thermostat', function(){
         var endingTemp = thermostat.temperature;
         expect(startingTemp-endingTemp).toEqual(1);
       });
+
       it('decreases the temperature by specified decrement', function(){
         var startingTemp = thermostat.temperature;
         thermostat.temperatureDown(5);
@@ -67,7 +68,7 @@ describe('Thermostat', function(){
 
     it('resets the temperature to default temperature when called', function(){
       thermostat.reset();
-      expect(thermostat.temperature).toEqual(20);
+      expect(thermostat.temperature).toEqual(DEFAULT_TEMPERATURE);
     });
   });
 
@@ -86,7 +87,7 @@ describe('Thermostat', function(){
   });
 
   describe('#powerSaverSwitch', function() {
-    it('changes the state of the power saving mode', function() {
+    it('Turns off power saver when it\'s on', function() {
       thermostat.powerSaverSwitch();
       expect(thermostat.isPowerSaverOn).toEqual(false);
     });
@@ -94,6 +95,22 @@ describe('Thermostat', function(){
       thermostat.powerSaverSwitch();
       expect(thermostat.currentMaxTemperature).toEqual(MAX_TEMP_POWERSAVER_OFF);
     });
+
+    it('Turns on power saver when it\'s off', function() {
+      thermostat.powerSaverSwitch();
+      thermostat.powerSaverSwitch();
+      expect(thermostat.isPowerSaverOn).toEqual(true);
+    });
+
+    it('changes the maximum temperature after turning PS on', function() {
+      thermostat.powerSaverSwitch();
+      thermostat.powerSaverSwitch();
+      expect(thermostat.currentMaxTemperature).toEqual(MAX_TEMP_POWERSAVER_ON);
+    });
+
+
   });
+
+
 
 });

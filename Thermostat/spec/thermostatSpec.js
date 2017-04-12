@@ -35,7 +35,7 @@ describe('Thermostat', function(){
     });
 
     describe('#temperatureDown', function(){
-      
+
       it('decreases the temperature when user calls temperatureDown', function(){
         var startingTemp = thermostat.temperature;
         thermostat.temperatureDown();
@@ -44,6 +44,14 @@ describe('Thermostat', function(){
       });
     });
 
+  });
+
+  describe('#reset', function(){
+
+    it('resets the temperature to default temperature when called', function(){
+      thermostat.reset();
+      expect(thermostat.temperature).toEqual(20);
+    });
   });
 
 });

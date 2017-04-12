@@ -1,7 +1,11 @@
+const DEFAULT_TEMPERATURE = 20;
+const MAX_TEMP_POWERSAVER_ON = 25;
+const MAX_TEMP_POWERSAVER_OFF = 32;
+
 function Thermostat (){
-  this.temperature = 20;
+  this.temperature = DEFAULT_TEMPERATURE;
   this.isPowerSaverOn = true;
-  this.maxTemperature = 25;
+  this.maxTemperature = MAX_TEMP_POWERSAVER_ON;
 };
 
 Thermostat.prototype.temperatureUp = function(){
@@ -10,4 +14,8 @@ Thermostat.prototype.temperatureUp = function(){
 
 Thermostat.prototype.temperatureDown = function(){
   this.temperature--;
+}
+
+Thermostat.prototype.reset = function(){
+  this.temperature = DEFAULT_TEMPERATURE;
 }

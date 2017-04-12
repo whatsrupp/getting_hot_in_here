@@ -17,7 +17,11 @@ describe('Thermostat', function(){
     });
 
     it('initalizes with a current max temperature of 25', function(){
-      expect(thermostat.maxTemperature).toEqual(25);
+      expect(thermostat.currentMaxTemperature).toEqual(25);
+    });
+
+    it('initialises with a minimum temperature of 10', function() {
+      expect(thermostat.minTemperature).toEqual(10);
     });
 
   });
@@ -32,6 +36,13 @@ describe('Thermostat', function(){
         var endingTemp = thermostat.temperature;
         expect(endingTemp-startingTemp).toEqual(1);
       });
+
+      it('increases temperature by specified increment', function(){
+        var startingTemp = thermostat.temperature;
+        thermostat.temperatureUp(3);
+        var endingTemp = thermostat.temperature;
+        expect(endingTemp-startingTemp).toEqual(3);
+      });
     });
 
     describe('#temperatureDown', function(){
@@ -42,6 +53,12 @@ describe('Thermostat', function(){
         var endingTemp = thermostat.temperature;
         expect(startingTemp-endingTemp).toEqual(1);
       });
+      it('decreases the temperature by specified decrement', function(){
+        var startingTemp = thermostat.temperature;
+        thermostat.temperatureDown(5);
+        var endingTemp = thermostat.temperature;
+        expect(startingTemp-endingTemp).toEqual(5);
+      });
     });
 
   });
@@ -51,6 +68,31 @@ describe('Thermostat', function(){
     it('resets the temperature to default temperature when called', function(){
       thermostat.reset();
       expect(thermostat.temperature).toEqual(20);
+    });
+  });
+
+  describe('#currentEnergyUsage', function() {
+    it('should return low for temperature under 18', function() {
+      thermostat.temperatureDown(4);
+      expect(thermostat.currentEnergyUsage()).toEqual('Low usage');
+    });
+    it('should return medium for temperature between 18 and 25', function() {
+      expect(thermostat.currentEnergyUsage()).toEqual('Medium usage');
+    });
+    it('should return high for temperature over 25', function() {
+      thermostat.temperatureUp(6);
+      expect(thermostat.currentEnergyUsage()).toEqual('High usage');
+    });
+  });
+
+  describe('#powerSaverSwitch', function() {
+    it('changes the state of the power saving mode', function() {
+      thermostat.powerSaverSwitch();
+      expect(thermostat.isPowerSaverOn).toEqual(false);
+    });
+    it('changes the maximum temperature after turning PS off', function() {
+      thermostat.powerSaverSwitch();
+      expect(thermostat.currentMaxTemperature).toEqual(MAX_TEMP_POWERSAVER_OFF);
     });
   });
 
